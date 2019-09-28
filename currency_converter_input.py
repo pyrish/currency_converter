@@ -14,6 +14,13 @@ def clear_amount_field():
     amount_field = driver.find_element_by_id("cc-amount")
     amount_field.clear()
 
+def extract_dropdown_items():
+    select = Select(driver.find_element_by_id('sourceCurrency'))
+    options = select.options
+    optionsList = []
+    for option in options:
+        optionsList.append(option.get_attribute("value"))
+    return(optionsList)
 
 def currency_iteration(url, source_amount, from_currency, to_currency):
     wait = WebDriverWait(driver, 5)
@@ -53,13 +60,29 @@ if __name__ == '__main__':
   print('       Currency converter script -  Mariano Vazquez, 2019'      )
   print('###############################################################')
   print('\n')
+  print("Popular currencies: EUR | GBP | USD | INR | CAD | JPY | AUD | CHF")
+  print('\n')
+
+  currency_list = extract_dropdown_items()
 
   for i in range(1,6):
-      source_amount = input("Please enter the amount #" + str(i) + " to be converted: ")
+
+      source_amount = int(input("Please enter the amount #" + str(i) + " to be converted: "))
+      while source_amount <= 0 or not source_amount:
+          source_amount = int(input("Amount should be a positive number greater than zero, please enter again the amount #" + str(i) + " to be converted: "))
+
       from_currency = input("Please enter the source currency: ")
-      to_currency = input("Please enter the target currency: ")
-      converted_amount = currency_iteration(url, source_amount, from_currency, to_currency)
-      print(">> " + str(source_amount) + " " + from_currency + " are equal to " + str(converted_amount) + " " + to_currency)
+      while from_currency.upper().strip() not in currency_list:
+          from_currency = input("Invalid source currency, please enter a valid source currency: ").strip()
+
+      to_currency = input("Please enter the target currency: ").strip()
+
+      while to_currency.upper().strip() not in currency_list:
+          to_currency = input("Invalid target currency, please enter a valid target currency: ").strip()
+
+      converted_amount = currency_iteration(url, source_amount, from_currency.upper(), to_currency.upper())
+
+      print(">> " + str(source_amount) + " " + from_currency.upper() + " are equal to " + str(converted_amount) + " " + to_currency.upper())
       print('\n')
 
   driver.close()
