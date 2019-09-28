@@ -17,10 +17,10 @@ def clear_amount_field():
 def extract_dropdown_items():
     select = Select(driver.find_element_by_id('sourceCurrency'))
     options = select.options
-    optionsList = []
+    options_list = []
     for option in options:
-        optionsList.append(option.get_attribute("value"))
-    return(optionsList)
+        options_list.append(option.get_attribute("value"))
+    return(options_list)
 
 def currency_iteration(url, source_amount, from_currency, to_currency):
     wait = WebDriverWait(driver, 5)
@@ -40,7 +40,7 @@ def currency_iteration(url, source_amount, from_currency, to_currency):
     converted_amount = driver.find_element_by_id("cc-amount-to").get_attribute('value')
     driver.back()
 
-    return(converted_amount)
+    return(float(converted_amount))
 
 
 if __name__ == '__main__':
@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
   print('\n')
   print('###############################################################')
-  print('       Currency converter script -  Mariano Vazquez, 2019'      )
+  print('          Currency converter -  Mariano Vazquez, 2019'          )
   print('###############################################################')
   print('\n')
   print("Popular currencies: EUR | GBP | USD | INR | CAD | JPY | AUD | CHF")
@@ -67,9 +67,9 @@ if __name__ == '__main__':
 
   for i in range(1,6):
 
-      source_amount = int(input("Please enter the amount #" + str(i) + " to be converted: "))
+      source_amount = float(input("Please enter the amount #" + str(i) + " to be converted: "))
       while source_amount <= 0 or not source_amount:
-          source_amount = int(input("Amount should be a positive number greater than zero, please enter again the amount #" + str(i) + " to be converted: "))
+          source_amount = float(input("Amount should be a positive number greater than zero, please enter again the amount #" + str(i) + " to be converted: "))
 
       from_currency = input("Please enter the source currency: ")
       while from_currency.upper().strip() not in currency_list:
@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
       converted_amount = currency_iteration(url, source_amount, from_currency.upper(), to_currency.upper())
 
-      print(">> " + str(source_amount) + " " + from_currency.upper() + " are equal to " + str(converted_amount) + " " + to_currency.upper())
+      print(">> " + str(source_amount) + " " + from_currency.upper() + " are equal to " + str(round(converted_amount, 2)) + " " + to_currency.upper())
       print('\n')
 
   driver.close()
