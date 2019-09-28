@@ -16,7 +16,7 @@ Requirements (on your system)
 ## Steps to run in your local machine
 
 1. Firstly, clone the repository using the git shell <br/>```$ git clone https://github.com/pyrish/currency_converter.git```
-2. Go to the base directory of the project ```$ cd currency-converter```
+2. Go to the base directory of the project  <br/>```$ cd currency-converter```
 3. Install the requirements for the project  <br/> ```$ pip install -r requirements.txt```
 5. Download the Chrome Webdriver (according to the version of your Chrome browser) and extract into the directory where you saved/cloned the currency_converter.py script.
 6. In the file "currency_converter.py" replace "CHROME_PATH" variable with the absolute path of the downloaded Chrome Webdriver.
