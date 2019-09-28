@@ -2,8 +2,7 @@
 
 Automation script developed in Python 3 with Selenium Webdriver.
 
-![picture alt](https://github.com/pyrish/currency_converter/blob/master/currency_converter.png"currency_converter.py")
-
+![picture alt](https://github.com/pyrish/currency_converter/blob/master/currency_converter.png?raw=true"currency_converter.py")
 
 ## Requirements
 
