@@ -85,4 +85,6 @@ if __name__ == '__main__':
       print(">> " + str(source_amount) + " " + from_currency.upper() + " are equal to " + str(round(converted_amount, 2)) + " " + to_currency.upper())
       print('\n')
 
-  driver.close()
+print('Thank you for using the currency converted tool. Enjoy your day, Bye!')
+print('\n')
+driver.close()
