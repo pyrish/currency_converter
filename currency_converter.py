@@ -71,7 +71,6 @@ if __name__ == '__main__':
 
   #Options for Local box
   chrome_options = webdriver.ChromeOptions()
-  # chrome_driver_path = '/Users/mariano/Desktop/scrapers/chromedriver'
   chrome_driver_path = CHROME_PATH
   driver = webdriver.Chrome(chrome_driver_path, chrome_options=chrome_options)
 
