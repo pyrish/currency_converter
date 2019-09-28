@@ -69,14 +69,10 @@ def currency_iteration(url, source_amount, from_currency, to_currency):
 
 if __name__ == '__main__':
 
-  #Options for Local box
-  chrome_options = webdriver.ChromeOptions()
-  chrome_driver_path = CHROME_PATH
-  driver = webdriver.Chrome(chrome_driver_path, chrome_options=chrome_options)
+  driver = webdriver.Chrome(executable_path=CHROME_PATH)
 
   driver.get(URL)
 
-  # os.system('clear')
   clear_screen()
 
   print('\n')
