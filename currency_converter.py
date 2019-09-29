@@ -74,9 +74,7 @@ def currency_iteration(url, source_amount, from_currency, to_currency):
 if __name__ == '__main__':
 
   driver = webdriver.Chrome(executable_path=CHROME_PATH)
-
   driver.get(URL)
-
   clear_screen()
 
   print('\n')
