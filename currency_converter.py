@@ -16,9 +16,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
-import platform # For getting the operating system name
-import subprocess # For executing a shell command
-import os
+import platform # Library used for getting the operating system name
+import subprocess # Library used for executing a shell command
+import os # Library used to clear the users command prompt/terminal
 
 CHROME_PATH = '../chromedriver' # Path to folder where repo has been cloned or where Chromedriver has been downloaded to
 URL = 'https://transferwise.com/ie/currency-converter/'
@@ -27,6 +27,7 @@ SOURCE_CURRENCY = 'sourceCurrency'
 TARGET_CURRENCY = 'targetCurrency'
 CONVERTED_CURRENCY = 'cc-amount-to'
 
+# Method to clear the screen - OS agnostic
 def clear_screen():
     if platform.system().lower() == "windows":
         command = "cls"
@@ -34,10 +35,12 @@ def clear_screen():
         command = "clear"
     return(subprocess.call(command) == 0)
 
+# Method to clear the amount field on each iteration
 def clear_amount_field():
     amount_field = driver.find_element_by_id(AMOUNT_FIELD)
     amount_field.clear()
 
+# Method to extract all list items from the dropdown menu to validate user input
 def extract_dropdown_items():
     select = Select(driver.find_element_by_id(SOURCE_CURRENCY))
     options = select.options
@@ -46,6 +49,7 @@ def extract_dropdown_items():
         options_list.append(option.get_attribute("value"))
     return(options_list)
 
+# Main method to automate the currency conversion process
 def currency_iteration(url, source_amount, from_currency, to_currency):
     wait = WebDriverWait(driver, 5)
     amount = wait.until(EC.visibility_of_element_located((By.ID, AMOUNT_FIELD)))
@@ -85,18 +89,21 @@ if __name__ == '__main__':
 
   currency_list = extract_dropdown_items()
 
+  # Generate 5 iterations and get user input (Amount/Source Currency/Target Currency)
   for i in range(1,6):
 
       source_amount = float(input("Please enter the amount #" + str(i) + " to be converted: "))
+      # Validation to make sure all entries are valid
       while source_amount <= 0 or not source_amount:
           source_amount = float(input("Amount should be a positive number greater than zero, please enter again the amount #" + str(i) + " to be converted: "))
 
       from_currency = input("Please enter the source currency: ")
+      # Validation to make sure all entries are valid
       while from_currency.upper().strip() not in currency_list:
           from_currency = input("Invalid source currency, please enter a valid source currency: ").strip()
 
       to_currency = input("Please enter the target currency: ").strip()
-
+      # Validation to make sure all entries are valid
       while to_currency.upper().strip() not in currency_list:
           to_currency = input("Invalid target currency, please enter a valid target currency: ").strip()
 
