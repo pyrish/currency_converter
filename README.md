@@ -14,7 +14,7 @@ Automation script developed in Python 3 with Selenium Webdriver.
 
 ## Steps to run in your local machine
 
-1. Firstly, clone the repository using the git shell <br/>```$ git clone https://github.com/pyrish/currency_converter.git```
+1. Download or clone the repository using the git shell <br/>```$ git clone https://github.com/pyrish/currency_converter.git```
 2. Go to the base directory of the project  <br/>```$ cd currency-converter```
 3. Install the requirements for the project  <br/> ```$ pip install -r requirements.txt```
 5. Download the Chrome Webdriver (according to the version of your Chrome browser) and extract into the directory where you saved/cloned the currency_converter.py script.
